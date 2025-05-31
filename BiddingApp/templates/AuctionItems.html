@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BidSecure - Auction Items</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">BidSecure</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'AuctionItems' %}">Auction Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ViewHighestBid' %}">View Highest Bid</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ViewWinner' %}">View Winner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Auction Items</h4>
+                        <form method="post" action="AuctionItemsAction" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">Auction Details</label>
+                                <input type="text" name="t1" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" name="t2" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" name="t3" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">End Date</label>
+                                <input type="date" name="t4" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Auction Type</label>
+                                <select name="actype" class="form-select">
+                                    <option value="Tender">Reverse Auction/Tender</option>
+                                    <option value="Auction">English Auction</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Upload Image</label>
+                                <input type="file" name="t5" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Submit Auction</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
